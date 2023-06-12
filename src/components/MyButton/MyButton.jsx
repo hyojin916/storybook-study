@@ -3,13 +3,21 @@
  * 예를 들어 TypeScript의 경우 -> 정적 타입 검사 도구
  *  */
 
+import React from 'react';
 import PropTypes from 'prop-types';
 import './Mybutton.css';
 
 /**
  * Primary UI component for user interaction
  */
-export const Button = ({ primary, backgroundColor, size, label, ...props }) => {
+export const Button = ({
+  primary,
+  backgroundColor,
+  size,
+  label,
+  radius,
+  ...props
+}) => {
   const mode = primary
     ? 'storybook-button--primary'
     : 'storybook-button--secondary';
@@ -19,7 +27,7 @@ export const Button = ({ primary, backgroundColor, size, label, ...props }) => {
       className={['storybook-button', `storybook-button--${size}`, mode].join(
         ' '
       )}
-      style={backgroundColor && { backgroundColor }}
+      style={(backgroundColor && { backgroundColor }, radius && { radius })}
       {...props}
     >
       {label}
@@ -48,6 +56,10 @@ Button.propTypes = {
    * Optional click handler
    */
   onClick: PropTypes.func,
+  /**
+   * radius
+   */
+  radius: PropTypes.number,
 };
 
 Button.defaultProps = {
@@ -55,4 +67,5 @@ Button.defaultProps = {
   primary: false,
   size: 'medium',
   onClick: undefined,
+  radius: null,
 };
